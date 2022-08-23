@@ -1,0 +1,19 @@
+package com.dbs.springboot;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+	
+	@GetMapping("/")
+	public String index() {
+		return "Greetings from Spring Boot";
+	}
+	
+	@GetMapping("/")
+	public Integer value(int a, int b) {
+		int sum = a+b;
+		return sum;
+	}
+}

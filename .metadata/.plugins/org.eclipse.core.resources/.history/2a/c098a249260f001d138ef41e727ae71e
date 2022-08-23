@@ -1,0 +1,30 @@
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import com.mysql.cj.xdevapi.Session;
+
+import hibernate_mapping.model.Employee;
+import hibernate_mapping.model.Laptop;
+import jakarta.transaction.Transaction;
+
+public class OnetoOneMain {
+	public static void main(String[] args) {
+		SessionFactory factory = new Configuration().configure().buildSessionFactory();
+		org.hibernate.Session session = factory.openSession();
+		org.hibernate.Transaction transaction = session.beginTransaction();
+		
+		Laptop laptop = new Laptop();
+		laptop.setCpu("i3");
+		laptop.setRam("8GB");
+		
+		Employee employee = new Employee();
+		employee.setName("Dr Tarakeshwar");
+		employee.setLaptop(laptop);
+		
+		session.save(laptop);
+		session.save(employee);
+		transaction.commit();
+		session.close();
+		factory.close();
+	}
+}
